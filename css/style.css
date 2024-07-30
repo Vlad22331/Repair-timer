@@ -1,0 +1,30 @@
+body{
+    background-color:#95AFBF;
+    margin: 0;
+}
+
+ul{
+    list-style: none;
+}
+
+.header{
+    background-color: #D8E8F2;
+}
+
+.header-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 50px;
+}
+
+.header-list-item{
+    margin: 0  20px;
+}
+
+.header-list-item > a{
+    color: black;
+    text-decoration: none;
+    margin: 30px;
+}
