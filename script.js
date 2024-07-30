@@ -31,10 +31,10 @@ async function getInfo  () {
 async function renderInfo () {
     const infoMass = await getInfo()
     console.log(infoMass);
-    const test1 =  infoMass.map(item => item.distance)
-    console.log(test1);
-    const test = test1.reduce((accumulator, currentValue) => accumulator = accumulator+currentValue);
-    console.log(test);
+    const distance =  infoMass.map(item => item.distance)
+    console.log(distance);
+    const totalDistance = distance.reduce((accumulator, currentValue) => accumulator = accumulator+currentValue);
+    console.log(totalDistance);
 }
 
 renderInfo()
