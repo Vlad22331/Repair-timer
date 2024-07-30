@@ -30,11 +30,10 @@ async function getInfo  () {
 
 async function renderInfo () {
     const infoMass = await getInfo()
-    console.log(infoMass);
     const distance =  infoMass.map(item => item.distance)
-    console.log(distance);
-    const totalDistance = distance.reduce((accumulator, currentValue) => accumulator = accumulator+currentValue);
-    console.log(totalDistance);
+    const totalDistance = Math.round(distance.reduce((accumulator, currentValue) => accumulator = accumulator+currentValue))/1000
+    if(!localStorage.getItem("firstTotalDistance")){
+        localStorage.setItem("firstTotalDistance", totalDistance)
+    }
 }
-
 renderInfo()
