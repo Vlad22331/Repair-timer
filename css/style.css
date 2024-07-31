@@ -28,3 +28,43 @@ ul{
     text-decoration: none;
     margin: 30px;
 }
+
+.main-info-container{
+    display: flex;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.main-info{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.info-item{
+    display: flex;
+    width: 20%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin: 20px 0px;
+}
+
+.info-item > img{
+    width: 100%;
+    aspect-ratio: 1/1;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+
+.info-item > h3{
+    margin: 10px auto;
+    height: 64px;
+    text-align: center;
+}
+
+.info-item > span{
+    font-size: 4vh;
+}
