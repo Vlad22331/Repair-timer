@@ -58,13 +58,24 @@ function changeIndexPage (currentDistance) {
 
 function createLocalStoreg (currentDistance) {
     if(!localStorage.getItem("chainLubricationTime")){
-        localStorage.setItem("chainLubricationTime", 100)
-        localStorage.setItem("chainChengeTime", 3000)
-        localStorage.setItem("groupsetChangeTime", 3000)
-        localStorage.setItem("checkingForkTime", 500)
-        localStorage.setItem("forkLubricationTime", 3000)
-        localStorage.setItem("checkBreakTime", 500)
-        localStorage.setItem("ropesChangeTime", 3000)
+        if(document.querySelector(".chain-lubrication")){
+            localStorage.setItem("chainLubricationTime", document.querySelector(".chain-lubrication").value || 100)
+            localStorage.setItem("chainChengeTime", document.querySelector(".chain-chenge").value || 3000)
+            localStorage.setItem("groupsetChangeTime", document.querySelector(".groupset-change").value || 3000)
+            localStorage.setItem("checkingForkTime", document.querySelector(".checking-fork").value || 500)
+            localStorage.setItem("forkLubricationTime", document.querySelector(".fork-lubrication").value || 3000)
+            localStorage.setItem("checkBreakTime", document.querySelector(".check-break").value || 500)
+            localStorage.setItem("ropesChangeTime", document.querySelector(".ropes-change").value || 3000)
+        }
+        else{
+            localStorage.setItem("chainLubricationTime", 100)
+            localStorage.setItem("chainChengeTime", 3000)
+            localStorage.setItem("groupsetChangeTime",  3000)
+            localStorage.setItem("checkingForkTime",  500)
+            localStorage.setItem("forkLubricationTime",  3000)
+            localStorage.setItem("checkBreakTime",  500)
+            localStorage.setItem("ropesChangeTime",  3000)
+        }
     }
     else{
         localStorage.setItem("chainLubricationTime", localStorage.getItem("chainLubricationTime") - (currentDistance - localStorage.getItem("chainLubrication")))
