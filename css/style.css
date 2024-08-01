@@ -65,6 +65,30 @@ ul{
     text-align: center;
 }
 
+.info-item > h2{
+    text-align: center;
+    background-color: red;
+}
 .info-item > span{
+    display: flex;
     font-size: 4vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-item > span > input{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #444;
+    font-size: 4vh; 
+    outline: none;
+    width: 30%;
+    margin: 10px;
+}
+
+.info-item > button{
+    margin: 15px;
+    font-size: 2vh;
+    background-color:#32c539;
+    border: 0.5px solid black;
 }

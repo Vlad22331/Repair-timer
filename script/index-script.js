@@ -35,5 +35,26 @@ async function renderInfo () {
     if(!localStorage.getItem("firstTotalDistance")){
         localStorage.setItem("firstTotalDistance", totalDistance)
     }
+    changeIndexPage(totalDistance)
 }
+
+function changeIndexPage (CurrentDistance) {
+
+    const spanMass = document.getElementsByClassName("span")
+
+    let timeToRepair = [
+        localStorage.getItem("chainLubrication") || 100,
+        localStorage.getItem("chainChenge") || 3000,
+        localStorage.getItem("groupsetChange") || 3000,
+        localStorage.getItem("checkingFork") || 500,
+        localStorage.getItem("forkLubrication") || 3000,
+        localStorage.getItem("checkBreak") || 500,
+        localStorage.getItem("ropesChange") || 3000
+    ]
+
+    for (let i = 0; i < spanMass.length; i++) {
+        console.log(spanMass[i].innerHTML = `${timeToRepair[i]} км.`)
+    }
+}
+
 renderInfo()
