@@ -20,7 +20,6 @@ const getAccessToken = async () => {
     return result.access_token
 }
 
-
 async function getInfo  () {
     const accessToken = await getAccessToken()
     const responce = await fetch(`https://www.strava.com/api/v3/athlete/activities?access_token=${accessToken}&per_page=100`)
@@ -38,23 +37,55 @@ async function renderInfo () {
     changeIndexPage(totalDistance)
 }
 
-function changeIndexPage (CurrentDistance) {
-
+function changeIndexPage (currentDistance) {
+    createLocalStoreg(currentDistance)
     const spanMass = document.getElementsByClassName("span")
 
     let timeToRepair = [
-        localStorage.getItem("chainLubrication") || 100,
-        localStorage.getItem("chainChenge") || 3000,
-        localStorage.getItem("groupsetChange") || 3000,
-        localStorage.getItem("checkingFork") || 500,
-        localStorage.getItem("forkLubrication") || 3000,
-        localStorage.getItem("checkBreak") || 500,
-        localStorage.getItem("ropesChange") || 3000
+        localStorage.getItem("chainLubricationTime"),
+        localStorage.getItem("chainChengeTime"),
+        localStorage.getItem("groupsetChangeTime"),
+        localStorage.getItem("checkingForkTime"),
+        localStorage.getItem("forkLubricationTime"),
+        localStorage.getItem("checkBreakTime"),
+        localStorage.getItem("ropesChangeTime")
     ]
 
     for (let i = 0; i < spanMass.length; i++) {
-        console.log(spanMass[i].innerHTML = `${timeToRepair[i]} км.`)
+        spanMass[i].innerHTML = `${timeToRepair[i]} км.`
+    }
+}
+
+function createLocalStoreg (currentDistance) {
+    if(!localStorage.getItem("chainLubricationTime")){
+        localStorage.setItem("chainLubricationTime", 100)
+        localStorage.setItem("chainChengeTime", 3000)
+        localStorage.setItem("groupsetChangeTime", 3000)
+        localStorage.setItem("checkingForkTime", 500)
+        localStorage.setItem("forkLubricationTime", 3000)
+        localStorage.setItem("checkBreakTime", 500)
+        localStorage.setItem("ropesChangeTime", 3000)
+    }
+    else{
+        localStorage.setItem("chainLubricationTime", localStorage.getItem("chainLubricationTime") - (currentDistance - localStorage.getItem("chainLubrication")))
+        localStorage.setItem("chainChengeTime", localStorage.getItem("chainChengeTime") - (currentDistance - localStorage.getItem("chainChenge")))
+        localStorage.setItem("groupsetChangeTime", localStorage.getItem("groupsetChangeTime") - (currentDistance - localStorage.getItem("groupsetChange")))
+        localStorage.setItem("checkingForkTime", localStorage.getItem("checkingForkTime") - (currentDistance - localStorage.getItem("checkingFork")))
+        localStorage.setItem("forkLubricationTime", localStorage.getItem("forkLubricationTime") - (currentDistance - localStorage.getItem("forkLubrication")))
+        localStorage.setItem("checkBreakTime", localStorage.getItem("checkBreakTime") - (currentDistance - localStorage.getItem("checkBreak")))
+        localStorage.setItem("ropesChangeTime", localStorage.getItem("ropesChangeTime") - (currentDistance - localStorage.getItem("ropesChange")))
+    }
+
+    if(!localStorage.getItem("chainLubrication")){
+        localStorage.setItem("chainLubrication", currentDistance)
+        localStorage.setItem("chainChenge", currentDistance)
+        localStorage.setItem("groupsetChange", currentDistance)
+        localStorage.setItem("checkingFork", currentDistance)
+        localStorage.setItem("forkLubrication", currentDistance)
+        localStorage.setItem("checkBreak", currentDistance )
+        localStorage.setItem("ropesChange", currentDistance)
     }
 }
 
 renderInfo()
+// localStorage.clear()
