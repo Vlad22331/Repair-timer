@@ -1,3 +1,23 @@
+const repairTime = [
+    "chainLubricationTime",
+    "chainChengeTime",
+    "groupsetChangeTime",
+    "checkingForkTime",
+    "forkLubricationTime",
+    "checkBreakTime",
+    "ropesChangeTime",
+]
+
+const repair = [
+    "chainLubrication",
+    "chainChenge",
+    "groupsetChange",
+    "checkingFork",
+    "forkLubrication",
+    "checkBreak",
+    "ropesChange",
+]
+
 const getAccessToken = async () => {
     auth_link = "https://www.strava.com/oauth/token"
     const responce = await fetch(auth_link,{
@@ -35,56 +55,58 @@ async function renderInfo () {
         localStorage.setItem("firstTotalDistance", totalDistance)
     }
     changeIndexPage(totalDistance)
+    // changeIndexPage(2300)
 }
 
 function changeIndexPage (currentDistance) {
+    renderInput()
     createLocalStoreg(currentDistance)
     const spanMass = document.getElementsByClassName("span")
 
-    let timeToRepair = [
-        localStorage.getItem("chainLubricationTime"),
-        localStorage.getItem("chainChengeTime"),
-        localStorage.getItem("groupsetChangeTime"),
-        localStorage.getItem("checkingForkTime"),
-        localStorage.getItem("forkLubricationTime"),
-        localStorage.getItem("checkBreakTime"),
-        localStorage.getItem("ropesChangeTime")
-    ]
-
     for (let i = 0; i < spanMass.length; i++) {
-        spanMass[i].innerHTML = `${timeToRepair[i]} км.`
+        spanMass[i].innerHTML = `${localStorage.getItem(repairTime[i]) - (currentDistance - localStorage.getItem(repair[i]))} км.`
+    }
+}
+
+function renderInput () {
+    if(document.querySelector(".input")){
+        const inputMass = document.getElementsByClassName("input")
+        const inputClassMass = [
+            ".chain-lubrication",
+            ".chain-chenge",
+            ".groupset-change",
+            ".checking-fork",
+            ".fork-lubrication",
+            ".check-break",
+            ".ropes-change",
+        ]
+
+        for(let i=0; i < inputMass.length; i++){
+            inputMass[i].addEventListener("change", () => {
+                localStorage.setItem(repairTime[i], document.querySelector(inputClassMass[i]).value)
+            })
+        }
+
+        // localStorage.setItem("chainLubricationTime", document.querySelector(".chain-lubrication").value)
+        // localStorage.setItem("chainChengeTime", document.querySelector(".chain-chenge").value)
+        // localStorage.setItem("groupsetChangeTime", document.querySelector(".groupset-change").value)
+        // localStorage.setItem("checkingForkTime", document.querySelector(".checking-fork").value)
+        // localStorage.setItem("forkLubricationTime", document.querySelector(".fork-lubrication").value)
+        // localStorage.setItem("checkBreakTime", document.querySelector(".check-break").value)
+        // localStorage.setItem("ropesChangeTime", document.querySelector(".ropes-change").value)
     }
 }
 
 function createLocalStoreg (currentDistance) {
+    localStorage.setItem("totalDistance", currentDistance)
     if(!localStorage.getItem("chainLubricationTime")){
-        if(document.querySelector(".chain-lubrication")){
-            localStorage.setItem("chainLubricationTime", document.querySelector(".chain-lubrication").value || 100)
-            localStorage.setItem("chainChengeTime", document.querySelector(".chain-chenge").value || 3000)
-            localStorage.setItem("groupsetChangeTime", document.querySelector(".groupset-change").value || 3000)
-            localStorage.setItem("checkingForkTime", document.querySelector(".checking-fork").value || 500)
-            localStorage.setItem("forkLubricationTime", document.querySelector(".fork-lubrication").value || 3000)
-            localStorage.setItem("checkBreakTime", document.querySelector(".check-break").value || 500)
-            localStorage.setItem("ropesChangeTime", document.querySelector(".ropes-change").value || 3000)
-        }
-        else{
-            localStorage.setItem("chainLubricationTime", 100)
-            localStorage.setItem("chainChengeTime", 3000)
-            localStorage.setItem("groupsetChangeTime",  3000)
-            localStorage.setItem("checkingForkTime",  500)
-            localStorage.setItem("forkLubricationTime",  3000)
-            localStorage.setItem("checkBreakTime",  500)
-            localStorage.setItem("ropesChangeTime",  3000)
-        }
-    }
-    else{
-        localStorage.setItem("chainLubricationTime", localStorage.getItem("chainLubricationTime") - (currentDistance - localStorage.getItem("chainLubrication")))
-        localStorage.setItem("chainChengeTime", localStorage.getItem("chainChengeTime") - (currentDistance - localStorage.getItem("chainChenge")))
-        localStorage.setItem("groupsetChangeTime", localStorage.getItem("groupsetChangeTime") - (currentDistance - localStorage.getItem("groupsetChange")))
-        localStorage.setItem("checkingForkTime", localStorage.getItem("checkingForkTime") - (currentDistance - localStorage.getItem("checkingFork")))
-        localStorage.setItem("forkLubricationTime", localStorage.getItem("forkLubricationTime") - (currentDistance - localStorage.getItem("forkLubrication")))
-        localStorage.setItem("checkBreakTime", localStorage.getItem("checkBreakTime") - (currentDistance - localStorage.getItem("checkBreak")))
-        localStorage.setItem("ropesChangeTime", localStorage.getItem("ropesChangeTime") - (currentDistance - localStorage.getItem("ropesChange")))
+        localStorage.setItem("chainLubricationTime", 100)
+        localStorage.setItem("chainChengeTime", 3000)
+        localStorage.setItem("groupsetChangeTime",  3000)
+        localStorage.setItem("checkingForkTime",  500)
+        localStorage.setItem("forkLubricationTime",  3000)
+        localStorage.setItem("checkBreakTime",  500)
+        localStorage.setItem("ropesChangeTime",  3000)
     }
 
     if(!localStorage.getItem("chainLubrication")){
@@ -100,14 +122,16 @@ function createLocalStoreg (currentDistance) {
 
 function renderBtn () {
     const btnMass = document.getElementsByClassName("btn")
-    const spanMass = document.getElementsByClassName("span")
+    const spanMass = document.getElementsByClassName("span")        
 
     for(let i =0; i<btnMass.length; i++){
-        btnMass[i].addEventListener("click", () =>{
-            spanMass[i].innerHTML = `${timeToRepair[i]} км.`
+        btnMass[i].addEventListener("click", () =>{                                                
+            localStorage.setItem(repair[i], localStorage.getItem("totalDistance"))
+            spanMass[i].innerHTML = `${localStorage.getItem(repairTime[i])} км.`
         })
     }
 }
 
 renderInfo()
-// localStorage.clear()
+renderBtn()
+// localStorage.clear() 
