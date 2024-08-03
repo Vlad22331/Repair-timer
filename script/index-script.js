@@ -55,7 +55,6 @@ async function renderInfo () {
         localStorage.setItem("firstTotalDistance", totalDistance)
     }
     changeIndexPage(totalDistance)
-    // changeIndexPage(2300)
 }
 
 function changeIndexPage (currentDistance) {
@@ -71,29 +70,14 @@ function changeIndexPage (currentDistance) {
 function renderInput () {
     if(document.querySelector(".input")){
         const inputMass = document.getElementsByClassName("input")
-        const inputClassMass = [
-            ".chain-lubrication",
-            ".chain-chenge",
-            ".groupset-change",
-            ".checking-fork",
-            ".fork-lubrication",
-            ".check-break",
-            ".ropes-change",
-        ]
 
         for(let i=0; i < inputMass.length; i++){
             inputMass[i].addEventListener("change", () => {
-                localStorage.setItem(repairTime[i], document.querySelector(inputClassMass[i]).value)
+                localStorage.setItem(repairTime[i], inputMass[i].value)
+                inputMass[i].value = localStorage.getItem(repairTime[i])
             })
+            inputMass[i].value = localStorage.getItem(repairTime[i])
         }
-
-        // localStorage.setItem("chainLubricationTime", document.querySelector(".chain-lubrication").value)
-        // localStorage.setItem("chainChengeTime", document.querySelector(".chain-chenge").value)
-        // localStorage.setItem("groupsetChangeTime", document.querySelector(".groupset-change").value)
-        // localStorage.setItem("checkingForkTime", document.querySelector(".checking-fork").value)
-        // localStorage.setItem("forkLubricationTime", document.querySelector(".fork-lubrication").value)
-        // localStorage.setItem("checkBreakTime", document.querySelector(".check-break").value)
-        // localStorage.setItem("ropesChangeTime", document.querySelector(".ropes-change").value)
     }
 }
 
