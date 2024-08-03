@@ -98,5 +98,16 @@ function createLocalStoreg (currentDistance) {
     }
 }
 
+function renderBtn () {
+    const btnMass = document.getElementsByClassName("btn")
+    const spanMass = document.getElementsByClassName("span")
+
+    for(let i =0; i<btnMass.length; i++){
+        btnMass[i].addEventListener("click", () =>{
+            spanMass[i].innerHTML = `${timeToRepair[i]} км.`
+        })
+    }
+}
+
 renderInfo()
 // localStorage.clear()

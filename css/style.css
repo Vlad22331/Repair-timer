@@ -87,6 +87,7 @@ ul{
 }
 
 .info-item > button{
+    cursor: pointer;
     margin: 15px;
     font-size: 2vh;
     background-color:#32c539;
