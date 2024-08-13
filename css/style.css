@@ -69,7 +69,7 @@ ul{
     text-align: center;
     background-color: red;
 }
-.info-item > span{
+.ok > span{
     display: flex;
     font-size: 4vh;
     justify-content: center;
@@ -86,10 +86,25 @@ ul{
     margin: 10px;
 }
 
-.info-item > button{
+.btn{
     cursor: pointer;
     margin: 15px;
     font-size: 2vh;
     background-color:#32c539;
     border: 0.5px solid black;
+}
+
+.error{
+    display: none;
+    height: 100%;
+    width: 100%;
+    background-color: red;
+    align-items: center;
+    justify-content: center;
+}
+
+.error > h2{
+    text-align: center;
+    /* font-size: 30px; */
+    /* font-size: 120%; */
 }

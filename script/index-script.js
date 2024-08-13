@@ -61,9 +61,19 @@ function changeIndexPage (currentDistance) {
     renderInput()
     createLocalStoreg(currentDistance)
     const spanMass = document.getElementsByClassName("span")
+    const okDivMass = document.getElementsByClassName("ok")
+    const errorDivMass = document.getElementsByClassName("error")
 
     for (let i = 0; i < spanMass.length; i++) {
-        spanMass[i].innerHTML = `${localStorage.getItem(repairTime[i]) - (currentDistance - localStorage.getItem(repair[i]))} км.`
+        const distance = Math.floor(localStorage.getItem(repairTime[i]) - (currentDistance - localStorage.getItem(repair[i])))
+        
+        if(distance <= 0){
+            okDivMass[i].style.display = "none"
+            errorDivMass[i].style.display = "flex"
+        }
+        else{
+            spanMass[i].innerHTML = `${distance} км.`   
+        }
     }
 }
 
@@ -111,7 +121,8 @@ function renderBtn () {
     for(let i =0; i<btnMass.length; i++){
         btnMass[i].addEventListener("click", () =>{                                                
             localStorage.setItem(repair[i], localStorage.getItem("totalDistance"))
-            spanMass[i].innerHTML = `${localStorage.getItem(repairTime[i])} км.`
+            // spanMass[i].innerHTML = `${localStorage.getItem(repairTime[i])} км.`
+            renderInfo()
         })
     }
 }
